@@ -30,7 +30,7 @@ public struct BTreeIterator<Key: Comparable, Value>: IteratorProtocol {
 }
 
 /// A dummy, zero-size key that is useful in B-trees that don't need key-based lookup.
-internal struct EmptyKey: Comparable {
+internal struct EmptyKey: Comparable, Equatable, Hashable {
     internal static func ==(a: EmptyKey, b: EmptyKey) -> Bool { return true }
     internal static func <(a: EmptyKey, b: EmptyKey) -> Bool { return false }
 }
@@ -147,6 +147,14 @@ internal struct BTreeStrongPath<Key: Comparable, Value>: BTreePath {
         }
     }
 }
+
+extension BTreeIterator: Equatable where Key: Equatable, Value: Equatable {}
+extension BTreeIterator: Hashable where Key: Hashable, Value: Hashable {}
+
+extension BTreeKeyIterator: Equatable where Key: Equatable {}
+
+extension BTreeStrongPath: Equatable where Key: Equatable, Value: Equatable {}
+extension BTreeStrongPath: Hashable where Key: Hashable, Value: Hashable {}
 
 #if swift(>=4.2)
 extension EmptyKey: Codable {}

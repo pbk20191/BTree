@@ -1072,6 +1072,9 @@ extension BTree {
     }
 }
 
+extension BTree: Equatable where Key: Equatable, Value: Equatable {}
+extension BTree: Hashable where Key: Hashable, Value: Hashable {}
+
 #if swift(>=4.2)
 extension BTree:Codable where Key: Codable, Value:Codable {}
 #endif

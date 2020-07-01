@@ -565,6 +565,9 @@ extension Map {
     }
 }
 
+extension Map: Equatable where Key: Equatable, Value: Equatable {}
+extension Map: Hashable where Key: Hashable, Value: Hashable {}
+
 #if swift(>=4.2)
 extension Map: Codable where Key: Codable, Value: Codable {}
 #endif

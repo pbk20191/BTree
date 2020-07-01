@@ -915,9 +915,13 @@ extension SortedSet where Element: Strideable {
 // for BTree<Codable, Codable> and for BTree<Codable, Void>
 //
 // thus the need for EmptyValue
-public struct EmptyValue {
+public struct EmptyValue: Equatable, Hashable {
     static let def = EmptyValue()
 }
+
+extension SortedSet: Equatable where Element: Equatable {}
+extension SortedSet: Hashable where Element: Hashable {}
+
 
 #if swift(>=4.2)
 extension EmptyValue: Codable {}
