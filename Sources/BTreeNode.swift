@@ -611,6 +611,27 @@ extension BTreeNode {
     }
 }
 
+extension BTreeNode: Equatable where Key: Equatable, Value: Equatable {
+    static func == (lhs: BTreeNode<Key, Value>, rhs: BTreeNode<Key, Value>) -> Bool {
+        return zip(lhs.elements, rhs.elements).allSatisfy {$0.0 == $1.0 && $0.1 == $1.1}
+    }
+}
+extension BTreeNode: Hashable where Key: Hashable, Value: Hashable {
+    struct PairForHashing<Key: Hashable, Value: Hashable>: Hashable {
+        var key: Key
+        var value: Value
+        init(_ key: Key, _ value: Value) {
+            self.key = key
+            self.value = value
+        }
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(elements.map{PairForHashing($0.0, $0.1)})
+        hasher.combine(children)
+    }
+}
+
 #if swift(>=4.2)
 extension BTreeNode: Codable where Key: Codable, Value: Codable {
     // Swift's tuples do not support Codable yet, so we have to generate this manually
@@ -623,7 +644,7 @@ extension BTreeNode: Codable where Key: Codable, Value: Codable {
         case _depth
     }
 
-    struct Pair<Key: Codable, Value: Codable>: Codable {
+    struct PairForCoding<Key: Codable, Value: Codable>: Codable {
         var key: Key
         var value: Value
         init(_ key: Key, _ value: Value) {
@@ -634,7 +655,7 @@ extension BTreeNode: Codable where Key: Codable, Value: Codable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.elements.map({Pair($0.0, $0.1)}), forKey: .elements)
+        try container.encode(self.elements.map({PairForCoding($0.0, $0.1)}), forKey: .elements)
         try container.encode(children, forKey: .children)
         try container.encode(count, forKey: .count)
         try container.encode(_order, forKey: ._order)
@@ -643,7 +664,7 @@ extension BTreeNode: Codable where Key: Codable, Value: Codable {
 
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let elements = try container.decode(Array<Pair<Key, Value>>.self, forKey: .elements)
+        let elements = try container.decode(Array<PairForCoding<Key, Value>>.self, forKey: .elements)
         let children = try container.decode(Array<BTreeNode<Key, Value>>.self, forKey: .children)
         let count = try container.decode(Int.self, forKey: .count)
         let _order = try container.decode(Int32.self, forKey: ._order)
