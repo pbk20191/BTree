@@ -12,11 +12,12 @@ import PackageDescription
 let package = Package(
     name: "BTree",
     products: [
-        .library(name: "BTree", targets: ["BTree"])
+        .library(name: "BTree", targets: ["BTreeModule"])
     ],
     dependencies: [
     ],
     targets: [
+        .target(name: "BTreeModule", dependencies: [], path: "Sources"),
         .target(name: "BTree", dependencies: [], path: "Sources"),
         .testTarget(name: "BTreeTests", dependencies: ["BTree"], path: "Tests/BTreeTests")
     ],
