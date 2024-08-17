@@ -205,6 +205,5 @@ extension BTreeIndex: Codable where Key: Codable, Value: Codable {}
 #endif
 
 #if canImport(_Concurrency)
-// extension BTreeIndex: Sendable where Key: Sendable, Value: Sendable {}
-// extension BTreeWeakPath: Sendable where Key: Sendable, Value: Sendable {}
+extension BTreeIndex: @unchecked Sendable where Key: Sendable, Value: Sendable {}
 #endif

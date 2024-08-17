@@ -703,3 +703,8 @@ public final class BTreeCursor<Key: Comparable, Value> {
         return mid
     }
 }
+
+#if canImport(_Concurrency)
+@available(*, unavailable)
+extension BTreeCursor: Sendable {}
+#endif
