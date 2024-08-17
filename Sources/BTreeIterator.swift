@@ -156,14 +156,22 @@ extension BTreeKeyIterator: Equatable where Key: Equatable {}
 extension BTreeStrongPath: Equatable where Key: Equatable, Value: Equatable {}
 extension BTreeStrongPath: Hashable where Key: Hashable, Value: Hashable {}
 
-#if swift(>=4.2)
+
+#if compiler(>=4.2)
 extension EmptyKey: Codable {}
 
-extension BTreeKeyIterator: Codable where Key: Codable {}
-
-extension BTreeValueIterator: Codable where Value: Codable {}
+extension BTreeStrongPath: Codable where Key: Codable, Value: Codable {}
 
 extension BTreeIterator: Codable where Key: Codable, Value: Codable {}
 
-extension BTreeStrongPath: Codable where Key: Codable, Value: Codable {}
+extension BTreeValueIterator: Codable where Value: Codable {}
+
+extension BTreeKeyIterator: Codable where Key: Codable {}
+
+#endif
+
+#if canImport(_Concurrency)
+
+extension EmptyKey: Sendable {}
+
 #endif

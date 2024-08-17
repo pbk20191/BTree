@@ -641,7 +641,7 @@ internal enum BTreePart<Key: Comparable, Value> {
 extension BTreePart {
     var count: Int {
         switch self {
-        case .element(_, _):
+        case .element(_):
             return 1
         case .node(let node):
             return node.count

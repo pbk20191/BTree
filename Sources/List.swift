@@ -569,6 +569,10 @@ extension List {
 extension List: Equatable where Element: Equatable {}
 extension List: Hashable where Element: Hashable {}
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
 extension List: Codable where Element: Codable {}
+#endif
+
+#if canImport(_Concurrency)
+extension List: Sendable where Element: Sendable {}
 #endif

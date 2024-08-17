@@ -1075,6 +1075,10 @@ extension BTree {
 extension BTree: Equatable where Key: Equatable, Value: Equatable {}
 extension BTree: Hashable where Key: Hashable, Value: Hashable {}
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
 extension BTree:Codable where Key: Codable, Value:Codable {}
+#endif
+
+#if canImport(_Concurrency)
+extension BTree: @unchecked Sendable where Key: Sendable, Value: Sendable {}
 #endif

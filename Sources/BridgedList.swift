@@ -53,7 +53,7 @@ internal class BridgedList<Value>: NSArray {
     public override func objectEnumerator() -> NSEnumerator {
         return BridgedListEnumerator(iterator: tree.makeIterator())
     }
-
+#if canImport(ObjectiveC)
     public override func countByEnumerating(with state: UnsafeMutablePointer<NSFastEnumerationState>, objects buffer: AutoreleasingUnsafeMutablePointer<AnyObject?>, count len: Int) -> Int {
         precondition(MemoryLayout<(EmptyKey, Value)>.size == MemoryLayout<Value>.size)
         precondition(MemoryLayout<(EmptyKey, Value)>.stride == MemoryLayout<Value>.stride)
@@ -83,4 +83,5 @@ internal class BridgedList<Value>: NSArray {
         state.pointee = s
         return 1
     }
+#endif
 }

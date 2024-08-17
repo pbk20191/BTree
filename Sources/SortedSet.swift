@@ -923,8 +923,16 @@ extension SortedSet: Equatable where Element: Equatable {}
 extension SortedSet: Hashable where Element: Hashable {}
 
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
 extension EmptyValue: Codable {}
 
 extension SortedSet: Codable where Element: Codable {}
+#endif
+
+#if canImport(_Concurrency)
+
+extension EmptyValue: Sendable {}
+
+extension SortedSet: Sendable where Element: Sendable {}
+
 #endif

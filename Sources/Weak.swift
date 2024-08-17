@@ -28,6 +28,14 @@ extension Weak: Hashable where T: Hashable {
 }
 
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
+
 extension Weak: Codable where T: Codable {}
+
+#endif
+
+#if canImport(_Concurrency)
+
+extension Weak: Sendable where T: Sendable {}
+
 #endif

@@ -198,8 +198,13 @@ extension BTreeWeakPath: Hashable where Key: Hashable, Value: Hashable {}
 
 extension BTreeIndex: Hashable where Key: Hashable, Value: Hashable {}
 
-#if swift(>=4.2)
-extension BTreeWeakPath: Codable where Key: Codable, Value: Codable {}
 
+#if compiler(>=4.2)
+extension BTreeWeakPath: Codable where Key: Codable, Value: Codable {}
 extension BTreeIndex: Codable where Key: Codable, Value: Codable {}
+#endif
+
+#if canImport(_Concurrency)
+// extension BTreeIndex: Sendable where Key: Sendable, Value: Sendable {}
+// extension BTreeWeakPath: Sendable where Key: Sendable, Value: Sendable {}
 #endif

@@ -8,8 +8,9 @@
 
 import XCTest
 @testable import BTree
-
+#if canImport(ObjectiveC)
 @objc
+#endif
 internal class Foo: NSObject {
     var value: Int
 

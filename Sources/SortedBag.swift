@@ -988,6 +988,14 @@ extension SortedBag where Element: Strideable {
 extension SortedBag: Equatable where Element: Equatable {}
 extension SortedBag: Hashable where Element: Hashable {}
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
+
 extension SortedBag: Codable where Element: Codable {}
+
+#endif
+
+#if canImport(_Concurrency)
+
+extension SortedBag: Sendable where Element: Sendable {}
+
 #endif

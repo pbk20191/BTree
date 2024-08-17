@@ -617,7 +617,7 @@ extension BTreeNode: Equatable where Key: Equatable, Value: Equatable {
     }
 }
 extension BTreeNode: Hashable where Key: Hashable, Value: Hashable {
-    struct PairForHashing<Key: Hashable, Value: Hashable>: Hashable {
+    struct PairForHashing: Hashable {
         var key: Key
         var value: Value
         init(_ key: Key, _ value: Value) {
@@ -632,7 +632,7 @@ extension BTreeNode: Hashable where Key: Hashable, Value: Hashable {
     }
 }
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
 extension BTreeNode: Codable where Key: Codable, Value: Codable {
     // Swift's tuples do not support Codable yet, so we have to generate this manually
 
@@ -644,7 +644,7 @@ extension BTreeNode: Codable where Key: Codable, Value: Codable {
         case _depth
     }
 
-    struct PairForCoding<Key: Codable, Value: Codable>: Codable {
+    struct PairForCoding: Codable {
         var key: Key
         var value: Value
         init(_ key: Key, _ value: Value) {
@@ -664,7 +664,7 @@ extension BTreeNode: Codable where Key: Codable, Value: Codable {
 
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let elements = try container.decode(Array<PairForCoding<Key, Value>>.self, forKey: .elements)
+        let elements = try container.decode(Array<PairForCoding>.self, forKey: .elements)
         let children = try container.decode(Array<BTreeNode<Key, Value>>.self, forKey: .children)
         let count = try container.decode(Int.self, forKey: .count)
         let _order = try container.decode(Int32.self, forKey: ._order)

@@ -568,6 +568,10 @@ extension Map {
 extension Map: Equatable where Key: Equatable, Value: Equatable {}
 extension Map: Hashable where Key: Hashable, Value: Hashable {}
 
-#if swift(>=4.2)
+#if compiler(>=4.2)
 extension Map: Codable where Key: Codable, Value: Codable {}
+#endif
+
+#if canImport(_Concurrency)
+extension Map: Sendable where Key: Sendable, Value: Sendable {}
 #endif
