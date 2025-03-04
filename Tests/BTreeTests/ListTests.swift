@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 extension List {
     func assertValid() {

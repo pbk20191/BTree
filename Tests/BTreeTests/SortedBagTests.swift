@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 private final class Test: Comparable, ExpressibleByIntegerLiteral, CustomStringConvertible {
     let value: Int

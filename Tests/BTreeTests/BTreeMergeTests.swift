@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 class BTreeMergeTests: XCTestCase {
     typealias Builder = BTreeBuilder<Int, Void>

@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.10
 //
 //  Package.swift
 //  BTree
@@ -17,9 +17,8 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-        .target(name: "BTreeModule", dependencies: [], path: "Sources"),
-        .target(name: "BTree", dependencies: [], path: "Sources"),
-        .testTarget(name: "BTreeTests", dependencies: ["BTree"], path: "Tests/BTreeTests")
-    ],
-    swiftLanguageVersions: [4]
-)
+        .target(name: "BTreeModule"),
+        .target(name: "BTree", dependencies: ["BTreeModule"]),
+        .testTarget(name: "BTreeTests", dependencies: ["BTree"]),
+        .testTarget(name: "PerformanceTests", dependencies: ["BTree"])
+    ])

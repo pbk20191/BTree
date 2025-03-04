@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 
 class PathTests<Path: BTreePath> where Path.Key == Int, Path.Value == String {

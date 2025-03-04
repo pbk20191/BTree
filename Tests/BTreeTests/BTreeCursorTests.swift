@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 class BTreeCursorTests: XCTestCase {
     typealias Tree = BTree<Int, String>

@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 extension BTree {
     func assertValid(file: StaticString = #file, line: UInt = #line) {

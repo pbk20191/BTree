@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 private typealias Builder = BTreeBuilder<Int, Void>
 private typealias Node = BTreeNode<Int, Void>

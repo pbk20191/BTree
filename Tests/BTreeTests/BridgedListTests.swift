@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 #if canImport(ObjectiveC)
 @objc
 #endif

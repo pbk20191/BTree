@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BTree
+@testable import BTreeModule
 
 class BTreeTests: XCTestCase {
     typealias Tree = BTree<Int, String>
